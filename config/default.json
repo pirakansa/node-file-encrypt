@@ -1,0 +1,7 @@
+{
+    "Encrypt": {
+        "Algorithm": "aes256",
+        "Key": "=============256bit=============",
+        "InitialVector": "=====128bit====="
+    }
+}
