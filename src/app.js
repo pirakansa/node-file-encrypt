@@ -2,8 +2,11 @@
  * Copyright (c) 2018 pirakansa
  */
 import program from "commander";
-import * as solve from "./FileSolve";
-import * as encrypt from "./DataEncryption";
+import fs from "fs";
+import config from "config";
+import * as encrypt from "./EncryptionData";
+
+const BUFFER_MAX_SIZE = config.get("Stream.BufferSizeByKbyte") * 1024;
 
 /**
  * xor
@@ -23,11 +26,11 @@ function ErrorCall(err = null) {
 }
 
 /**
- * process on exit
+ * print exit message
  */
-process.on("exit", code => {
+function ExitCall() {
     console.log("Done.");
-});
+}
 
 /**
  * main
@@ -44,22 +47,15 @@ if (!program.if) process.exit(1);
 if (!program.of) process.exit(1);
 if (!XOR(program.encode, program.decode)) process.exit(1);
 
-const OUTPUT_FILE_PATH = program.of;
-const INPUT_FILE_PATH = program.if;
+const ifname = program.if;
+const ofname = program.of;
 
-if (program.encode)
-    solve.FileAnalysis(INPUT_FILE_PATH, data => {
-        solve.FileRestoration(
-            OUTPUT_FILE_PATH,
-            encrypt.CipherData(data),
-            ErrorCall
-        );
-    });
-else if (program.decode)
-    solve.FileAnalysis(INPUT_FILE_PATH, data => {
-        solve.FileRestoration(
-            OUTPUT_FILE_PATH,
-            encrypt.DecipherData(data),
-            ErrorCall
-        );
-    });
+let src = fs.createReadStream(ifname, { highWaterMark: BUFFER_MAX_SIZE });
+src.on("error", ErrorCall);
+let dest = fs.createWriteStream(ofname, { highWaterMark: BUFFER_MAX_SIZE });
+dest.on("error", ErrorCall).on("finish", ExitCall);
+let cipherobj = program.encode
+    ? encrypt.GetCipherObj()
+    : encrypt.GetDecipherObj();
+
+src.pipe(cipherobj).pipe(dest);
