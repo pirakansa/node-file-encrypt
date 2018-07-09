@@ -6,8 +6,6 @@ import fs from "fs";
 import config from "config";
 import * as encrypt from "./EncryptionData";
 
-const BUFFER_MAX_SIZE = config.get("Stream.BufferSizeByKbyte") * 1024;
-
 /**
  * xor
  * @param {bool} a
@@ -50,9 +48,9 @@ if (!XOR(program.encode, program.decode)) process.exit(1);
 const ifname = program.if;
 const ofname = program.of;
 
-let src = fs.createReadStream(ifname, { highWaterMark: BUFFER_MAX_SIZE });
+let src = fs.createReadStream(ifname, { flags: "r" });
 src.on("error", ErrorCall);
-let dest = fs.createWriteStream(ofname, { highWaterMark: BUFFER_MAX_SIZE });
+let dest = fs.createWriteStream(ofname, { flags: "wx+" });
 dest.on("error", ErrorCall).on("finish", ExitCall);
 let cipherobj = program.encode
     ? encrypt.GetCipherObj()
