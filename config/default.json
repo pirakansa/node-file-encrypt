@@ -1,10 +1,7 @@
 {
     "Encrypt": {
-        "Algorithm": "aes256",
+        "Algorithm": "AES-256-CFB",
         "Key": "=============256bit=============",
         "InitialVector": "=====128bit====="
-    },
-    "Stream": {
-        "BufferSizeByKbyte": 1024
     }
 }
