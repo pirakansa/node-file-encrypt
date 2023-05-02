@@ -1,7 +1,6 @@
 {
     "Encrypt": {
         "Algorithm": "AES-256-CFB",
-        "Key": "=============256bit=============",
-        "InitialVector": "=====128bit====="
+        "Phrase": "Phrase"
     }
 }
