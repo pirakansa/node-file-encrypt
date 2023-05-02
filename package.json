@@ -1,34 +1,12 @@
 {
   "name": "file-encrypt",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "dist/app.js",
   "engines": {
-    "node": "10.3.0",
-    "npm": "6.1.0"
+    "node": "^20.0.0",
+    "npm": "^9.6.4"
   },
-  "os": [
-    "linux",
-    "win32",
-    "aix",
-    "darwin",
-    "freebsd",
-    "openbsd",
-    "sunos"
-  ],
-  "cpu": [
-    "arm",
-    "arm64",
-    "ia32",
-    "mips",
-    "mipsel",
-    "ppc",
-    "ppc64",
-    "s390",
-    "s390x",
-    "x32",
-    "x64"
-  ],
   "scripts": {
     "test": "npm run format && babel src/",
     "format": "prettier --trailing-comma es5 --tab-width 4 --write src/*.js config/*.json README.md",
@@ -41,20 +19,17 @@
   "author": "pirakansa",
   "license": "MIT",
   "dependencies": {
-    "babel-cli": "6.26.0",
-    "babel-preset-env": "1.7.0",
-    "commander": "2.15.1",
-    "config": "1.30.0"
+    "commander": "^10.0.1",
+    "config": "^3.3.9"
   },
   "devDependencies": {
-    "prettier": "1.13.5"
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.5",
+    "@babel/preset-env": "^7.21.5",
+    "prettier": "^2.8.8"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/pirakansa"
-  },
-  "keywords": [
-    "pira",
-    "pirakansa"
-  ]
+  }
 }

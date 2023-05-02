@@ -1,9 +1,5 @@
-/**
- * Copyright (c) 2018 pirakansa
- */
-import program from "commander";
+import { Command } from "commander";
 import fs from "fs";
-import config from "config";
 import * as encrypt from "./EncryptionData";
 
 /**
@@ -33,26 +29,28 @@ function ExitCall() {
 /**
  * main
  */
-program
-    .version(process.env.npm_package_version, "-v, --version")
-    .option("-i, --if <n>", "input file")
-    .option("-o, --of <n>", "output file")
-    .option("-e, --encode", "do encode")
-    .option("-d, --decode", "do decode")
-    .parse(process.argv);
+const program = new Command();
+program.version(process.env.npm_package_version, "-v, --version");
+program.option("-i, --if <path>", "input file");
+program.option("-o, --of <path>", "output file");
+program.option("-e, --encode", "do encode");
+program.option("-d, --decode", "do decode");
+program.parse(process.argv);
 
-if (!program.if) process.exit(1);
-if (!program.of) process.exit(1);
-if (!XOR(program.encode, program.decode)) process.exit(1);
+const options = program.opts();
 
-const ifname = program.if;
-const ofname = program.of;
+if (!options.if) process.exit(1);
+if (!options.of) process.exit(2);
+if (!XOR(options.encode, options.decode)) process.exit(3);
+
+const ifname = options.if;
+const ofname = options.of;
 
 let src = fs.createReadStream(ifname, { flags: "r" });
 src.on("error", ErrorCall);
 let dest = fs.createWriteStream(ofname, { flags: "wx+" });
 dest.on("error", ErrorCall).on("finish", ExitCall);
-let cipherobj = program.encode
+let cipherobj = options.encode
     ? encrypt.GetCipherObj()
     : encrypt.GetDecipherObj();
 
