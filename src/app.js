@@ -1,6 +1,6 @@
 import { Command } from "commander";
 import fs from "fs";
-import zlib from 'zlib';
+import zlib from "zlib";
 import * as encrypt from "./EncryptionData";
 
 /**
@@ -53,8 +53,8 @@ let dest = fs.createWriteStream(ofname, { flags: "wx+" });
 dest.on("error", ErrorCall).on("finish", ExitCall);
 
 let gzipstream = options.encode
-    ? zlib.createGzip({level: zlib.constants.Z_BEST_COMPRESSION})
-    : zlib.createUnzip({level: zlib.constants.Z_BEST_COMPRESSION});
+    ? zlib.createGzip({ level: zlib.constants.Z_BEST_COMPRESSION })
+    : zlib.createUnzip({ level: zlib.constants.Z_BEST_COMPRESSION });
 gzipstream.on("error", ErrorCall);
 
 let cipherobj = options.encode
@@ -62,8 +62,6 @@ let cipherobj = options.encode
     : encrypt.GetDecipherObj();
 cipherobj.on("error", ErrorCall);
 
-options.encode 
+options.encode
     ? src.pipe(cipherobj).pipe(gzipstream).pipe(dest)
     : src.pipe(gzipstream).pipe(cipherobj).pipe(dest);
-    
-

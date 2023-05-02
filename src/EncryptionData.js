@@ -9,11 +9,11 @@ const ALGORITHM = config.get("Encrypt.Algorithm");
  * @returns {EncriptKey} EncriptKey object
  */
 function GetEncriptKey(phrase) {
-	const sh = crypto.createHash("sha256").update(phrase).digest();
+    const sh = crypto.createHash("sha256").update(phrase).digest();
     const md = crypto.createHash("md5").update(phrase).digest();
     const sh_md = crypto.createHash("sha256").update(md).digest();
-    const iv = sh_md.subarray(0, sh.length/2);
-	return {Key: sh, InitialVector: iv}
+    const iv = sh_md.subarray(0, sh.length / 2);
+    return { Key: sh, InitialVector: iv };
 }
 
 /**
