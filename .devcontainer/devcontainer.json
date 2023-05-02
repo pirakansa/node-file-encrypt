@@ -6,14 +6,5 @@
             "UID": "1000"
         }
     },
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "editor.renderWhitespace": "boundary",
-                "editor.accessibilitySupport": "off",
-                "diffEditor.ignoreTrimWhitespace": false
-            }
-        }
-    },
     "remoteUser": "node"
 }
