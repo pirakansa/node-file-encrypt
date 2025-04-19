@@ -1,6 +1,6 @@
 {
   "name": "file-encrypt",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "dist/app.js",
   "engines": {
@@ -21,14 +21,14 @@
   "author": "pirakansa",
   "license": "MIT",
   "dependencies": {
-    "commander": "^10.0.1",
-    "config": "^3.3.9"
+    "commander": "^13.1.0",
+    "config": "^3.3.12"
   },
   "devDependencies": {
-    "@babel/cli": "^7.21.5",
-    "@babel/core": "^7.21.5",
-    "@babel/preset-env": "^7.21.5",
-    "prettier": "^2.8.8"
+    "@babel/cli": "^7.27.0",
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "prettier": "^3.5.3"
   },
   "repository": {
     "type": "git",
