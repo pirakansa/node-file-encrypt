@@ -4,8 +4,8 @@
   "description": "",
   "main": "dist/app.js",
   "engines": {
-    "node": "^20.0.0",
-    "npm": "^9.6.4"
+    "node": "^22.14.0",
+    "npm": "^10.9.2"
   },
   "scripts": {
     "test": "npm run format && npm run debug-build && npm run test:enc && npm run test:dec",

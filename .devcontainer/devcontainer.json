@@ -1,10 +1,6 @@
 {
-    "name": "node-development-kit",
     "build": {
-        "dockerfile": "Dockerfile",
-        "args": {
-            "UID": "1000"
-        }
+        "dockerfile": "Dockerfile"
     },
     "remoteUser": "node"
 }
