@@ -1,9 +1,5 @@
 ###### Dockerfile
-FROM node:20.0-alpine3.17
-
-###### Env 
-ARG USER=node
-ARG UID=1000
+FROM node:22-alpine3.20
 
 ENV DEBIAN_FRONTEND=noninteractive \
     LANG=C.UTF-8 \
@@ -11,19 +7,19 @@ ENV DEBIAN_FRONTEND=noninteractive \
     LC_ALL=C.UTF-8
 
 ###### Run
-RUN install --owner=${USER} --directory /work ; \
-    apk add git ; \
+RUN install --owner=node --directory /work ; \
+    apk add git bash; \
     rm -rf /var/cache/apk/* ; \
     rm -rf /var/log/* ; \
     rm -rf /var/tmp/* ; \
     rm -rf /tmp/* ;
 
 ###### login user
-USER ${USER}
+USER node
 
 ###### working directory
 WORKDIR /work
 
-CMD ["/bin/sh"]
+CMD ["/bin/bash"]
 
 
